@@ -17,6 +17,18 @@ POST    /postTextbook                controllers.Application.postTextbook()
 GET     /textbook/:id/edit           controllers.Application.manageTextbook(id: Long)
 GET     /textbook/delete             controllers.Application.deleteTextbook(id: Long)
 
+GET     /newBuyOffer                 controllers.Application.newBuyOffer()
+GET     /showBuyOffers               controllers.Application.showBuyOffers()
+GET     /postBuyOffer                controllers.Application.postBuyOffer()
+GET     /buyOffer/:id/edit           controllers.Application.manageBuyOffer(id: Long)
+GET     /buyOffer/:id/delete         controllers.Application.deleteBuyOffer(id: Long)
+
+GET     /newSellOffer                 controllers.Application.newSellOffer()
+GET     /showSellOffers               controllers.Application.showSellOffers()
+GET     /postSellOffer                controllers.Application.postSellOffer()
+GET     /SellOffer/:id/edit           controllers.Application.manageSellOffer(id: Long)
+GET     /SellOffer/:id/delete         controllers.Application.deleteSellOffer(id: Long)
+
 
 
 # Map static resources from the /public folder to the /assets URL path

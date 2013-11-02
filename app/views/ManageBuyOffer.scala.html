@@ -1,0 +1,33 @@
+@(message: String, offerForm: Form[views.formdata.BuyOfferFormData])
+
+@import helper._
+@import bootstrap3._
+
+@Main(message) {
+<div class="container">
+
+  @form(routes.Application.postBuyOffer(), 'class -> "form-horizontal") {
+    
+    <!-- id -->
+    @hidden(offerForm("id"))
+    
+    @text(offerForm("isbn"),
+          label = "isbn",
+          placeholder = "",
+          help = "Textbook ISBN.")
+    
+    <!-- Name -->
+    @text(offerForm("offer"),
+          label="Offer $",
+          placeholder="", 
+          help="The Bid Offer Must be a Whole Number.")
+          
+          
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Bid</button>
+      </div>
+    </div>
+  }
+</div>
+}

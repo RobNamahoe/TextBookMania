@@ -1,11 +1,15 @@
 package controllers;
 
+import models.BuyOfferDB;
+import models.SellOfferDB;
 import models.StudentDB;
 import models.TextbookDB;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.formdata.BuyOfferFormData;
 import views.formdata.ConditionTypes;
+import views.formdata.SellOfferFormData;
 import views.formdata.StudentFormData;
 import views.formdata.TextbookFormData;
 import views.html.Index;
@@ -13,6 +17,10 @@ import views.html.ManageStudent;
 import views.html.ShowStudents;
 import views.html.ManageTextbook;
 import views.html.ShowTextbooks;
+import views.html.ManageBuyOffer;
+import views.html.ManageSellOffer;
+import views.html.ShowBuyOffers;
+import views.html.ShowSellOffers;
 
 /**
  * Implements the controllers for this application.
@@ -28,7 +36,7 @@ public class Application extends Controller {
   }
   
   ///////////////////////////////////////////////////////////////////////////////
-  // STUDENT METHODS                            
+  // STUDENT METHODS                                                           //
   ///////////////////////////////////////////////////////////////////////////////
   /**
    * Returns ManageStudent view configured to add a new student.
@@ -87,7 +95,7 @@ public class Application extends Controller {
   }
   
   ///////////////////////////////////////////////////////////////////////////////
-  // TEXTBOOK METHODS
+  // TEXTBOOK METHODS                                                          //
   ///////////////////////////////////////////////////////////////////////////////
   /**
    * Returns ManageTextbook view configured to add a new textbook.
@@ -144,4 +152,83 @@ public class Application extends Controller {
     TextbookDB.deleteTextbook(id);
     return ok(ShowTextbooks.render(TextbookDB.getTextbooks()));
   }
+  
+  
+   ///////////////////////////////////////////////////////////////////////////////
+   // BUY OFFER METHODS                                                         //
+   ///////////////////////////////////////////////////////////////////////////////
+  public static Result newBuyOffer() {
+    BuyOfferFormData data = new BuyOfferFormData();
+    Form<BuyOfferFormData> formData = Form.form(BuyOfferFormData.class).fill(data);
+    return ok(ManageBuyOffer.render("NewBuyOffer", formData));
+  }
+  
+  public static Result manageBuyOffer(long id) {
+    BuyOfferFormData data = new BuyOfferFormData(BuyOfferDB.getOffer(id));
+    Form<BuyOfferFormData> formData = Form.form(BuyOfferFormData.class).fill(data);
+    return ok(ManageBuyOffer.render("ManageBuyOffer", formData));
+  }
+  
+  public static Result postBuyOffer() {
+    Form<BuyOfferFormData> formData = Form.form(BuyOfferFormData.class).bindFromRequest();
+    if (formData.hasErrors()) {
+      System.out.println("Errors found");
+      return badRequest(ManageBuyOffer.render("", formData));
+    }
+    else {
+      BuyOfferFormData data = formData.get();
+      BuyOfferDB.addOffer(data);
+      return ok(ShowBuyOffers.render(BuyOfferDB.getOffers()));
+    }
+  }
+
+  public static Result showBuyOffers() {
+    return ok(ShowBuyOffers.render(BuyOfferDB.getOffers()));
+  }
+  
+  public static Result deleteBuyOffer(long id) {
+    BuyOfferDB.deleteOffer(id);
+    return ok(ShowBuyOffers.render(BuyOfferDB.getOffers()));
+  }
+  
+  
+   ///////////////////////////////////////////////////////////////////////////////
+   // SELL OFFER METHODS                                                        //
+   ///////////////////////////////////////////////////////////////////////////////
+  public static Result newSellOffer() {
+    SellOfferFormData data = new SellOfferFormData();
+    Form<SellOfferFormData> formData = Form.form(SellOfferFormData.class).fill(data);
+    return ok(ManageSellOffer.render("NewSellOffer", formData));
+  }
+  
+  public static Result manageSellOffer(long id) {
+    SellOfferFormData data = new SellOfferFormData(SellOfferDB.getOffer(id));
+    Form<SellOfferFormData> formData = Form.form(SellOfferFormData.class).fill(data);
+    return ok(ManageSellOffer.render("ManageSellOffer", formData));
+  }
+  
+  public static Result postSellOffer() {
+    Form<SellOfferFormData> formData = Form.form(SellOfferFormData.class).bindFromRequest();
+    if (formData.hasErrors()) {
+      System.out.println("Errors found");
+      return badRequest(ManageSellOffer.render("", formData));
+    }
+    else {
+      SellOfferFormData data = formData.get();
+      SellOfferDB.addOffer(data);
+      return ok(ShowSellOffers.render(SellOfferDB.getOffers()));
+    }
+  }
+
+  public static Result showSellOffers() {
+    return ok(ShowSellOffers.render(SellOfferDB.getOffers()));
+  }
+  
+  public static Result deleteSellOffer(long id) {
+    SellOfferDB.deleteOffer(id);
+    return ok(ShowSellOffers.render(SellOfferDB.getOffers()));
+  }
+  
+  
+  
 }
