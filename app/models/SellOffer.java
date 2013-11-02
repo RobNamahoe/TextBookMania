@@ -11,17 +11,14 @@ private long id = 0;
   
   private long expiration = 0;
   
-  private String isbn = "";
-  
-  private String condition = "";
+  private String isbn = ""; 
   
   
-  public SellOffer(long id, String isbn, int offer, long expiration, String condition) {
+  public SellOffer(long id, String isbn, int offer, long expiration) {
     this.id = id;
     this.isbn = isbn;
     this.offer = offer;
     this.expiration = expiration;
-    this.condition = condition;
   }
 
 
@@ -76,8 +73,8 @@ private long id = 0;
    * @param expiration
    * @return
    */
-  public String getExpirationDate(long expiration) {
-    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
+  public String getExpirationDate() {
+    DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss.SSS");
     Calendar calendar = Calendar.getInstance();
     calendar.setTimeInMillis(expiration);
     
@@ -98,22 +95,6 @@ private long id = 0;
    */
   public void setIsbn(String isbn) {
     this.isbn = isbn;
-  }
-
-
-  /**
-   * @return the condition
-   */
-  public String getCondition() {
-    return condition;
-  }
-
-
-  /**
-   * @param condition the condition to set
-   */
-  public void setCondition(String condition) {
-    this.condition = condition;
   }
 
 }

@@ -12,8 +12,8 @@
        @for(offer <- offers) {
        <tr>
          <td>@offer.getIsbn()</td>
-         <td>@offer.getOffer()</td>
-         <td>@offer.getExpiration()</td>
+         <td>$@offer.getOffer()</td>
+         <td>@offer.getExpirationDate()</td>
          <td><a href="@routes.Application.manageSellOffer(offer.getId())" class="btn btn-warning btn-xs">Edit</a></td>
          <td><a href="@routes.Application.deleteSellOffer(offer.getId())" class="btn btn-danger btn-xs">Delete</a></td>         
        </tr>

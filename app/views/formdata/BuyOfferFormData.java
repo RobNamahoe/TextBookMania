@@ -32,31 +32,30 @@ public class BuyOfferFormData {
   }
 
   
-  public BuyOfferFormData(long id, String isbn, int offer, long expiration) {
+  public BuyOfferFormData(long id, String isbn, int offer) {
     this.id = id;
     this.isbn = isbn;
     this.offer = offer;
-    this.expiration = expiration;
   }
   
   
   public List<ValidationError> validate() {
     List<ValidationError> errors = new ArrayList<>();
     
-    long index = 0;
+    long index = 1;
     boolean forSale = false;
     boolean found = false;
-    while(index < TextbookDB.getTextbooks().size() && found != true) {
-      if(isbn.equals(TextbookDB.getTextbook(index))) {
+    while(index <= TextbookDB.getTextbooks().size() && found != true) {
+      if(isbn.equals(TextbookDB.getTextbook(index).getIsbn())) {
         found = true;
       }
       index++;
     }
     
     if(found) {
-    index = 0;
-    while(index < SellOfferDB.getOffers().size() && forSale != true) {
-      if(isbn.equals(SellOfferDB.getOffer(index))) {
+    index = 1;
+    while(index <= SellOfferDB.getOffers().size() && forSale != true) {
+      if(isbn.equals(SellOfferDB.getOffer(index).getIsbn())) {
         forSale = true;
       }
       index++;
@@ -73,8 +72,9 @@ public class BuyOfferFormData {
     if(offer != (int)offer) {
       errors.add(new ValidationError("offer", "Offer Should Only be a Whole Number."));
     }
-    if(expiration == 0) {
-      errors.add(new ValidationError("expiration", "No Expiration Time Specified."));
+    
+    if(errors.isEmpty()) {
+      return null;
     }
     
     return errors;

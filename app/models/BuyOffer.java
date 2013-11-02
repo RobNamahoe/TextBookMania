@@ -73,8 +73,8 @@ public class BuyOffer {
    * @param expiration
    * @return
    */
-  public String getExpirationDate(long expiration) {
-    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
+  public String getExpirationDate() {
+    DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss.SSS");
     Calendar calendar = Calendar.getInstance();
     calendar.setTimeInMillis(expiration);
     
