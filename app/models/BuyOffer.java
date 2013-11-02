@@ -1,5 +1,9 @@
 package models;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class BuyOffer {
   private long id = 0;
   
@@ -63,6 +67,18 @@ public class BuyOffer {
    */
   public void setExpiration(long expiration) {
     this.expiration = expiration;
+  }
+  
+  /**
+   * @param expiration
+   * @return
+   */
+  public String getExpirationDate(long expiration) {
+    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTimeInMillis(expiration);
+    
+    return formatter.format(calendar.getTime());
   }
 
 

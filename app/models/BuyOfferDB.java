@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,10 @@ public class BuyOfferDB {
    */
   public static BuyOffer addOffer(BuyOfferFormData formData) {
     long id = (formData.id == 0) ? offers.size() + 1 : formData.id;
-    BuyOffer buyOffer = new BuyOffer(formData.id, formData.isbn, formData.offer, formData.expiration);
+    Calendar currentDate = Calendar.getInstance();
+    Calendar expirationDate = currentDate;
+    expirationDate.add(Calendar.DAY_OF_MONTH, 30);
+    BuyOffer buyOffer = new BuyOffer(formData.id, formData.isbn, formData.offer, expirationDate.getTimeInMillis());
     offers.put(id, buyOffer);
     System.out.println(id + ": " + formData.id + " added.");
     return buyOffer;

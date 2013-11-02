@@ -50,6 +50,7 @@ public class BuyOfferFormData {
       if(isbn.equals(TextbookDB.getTextbook(index))) {
         found = true;
       }
+      index++;
     }
     
     if(found) {
@@ -58,10 +59,13 @@ public class BuyOfferFormData {
       if(isbn.equals(SellOfferDB.getOffer(index))) {
         forSale = true;
       }
+      index++;
     }
     }
     
-    if(! found) {
+    if(isbn =="") {
+      errors.add(new ValidationError("isbn", "Textbook ISBN is Required."));
+    }else if(! found) {
       errors.add(new ValidationError("isbn", "Textbook ISBN is not valid."));
     }else if(! forSale) {
       errors.add(new ValidationError("isbn", "No Textbook With This ISBN is Currently Being Sold."));

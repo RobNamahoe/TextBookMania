@@ -5,14 +5,14 @@
 
 @Main(message) {
 <div class="container">
-
+<h1>Sell Offer</h1>
   @form(routes.Application.postSellOffer(), 'class -> "form-horizontal") {
     
     <!-- id -->
     @hidden(offerForm("id"))
     
     @text(offerForm("isbn"),
-          label = "isbn",
+          label = "ISBN",
           placeholder = "",
           help = "Textbook ISBN.")
     
