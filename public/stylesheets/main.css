@@ -17,6 +17,12 @@
   height: 100px;
 }
 
+.textbook-image {
+  background-size: cover;
+  background-position: center;
+  height: 100px;
+}
+
 .navbar {
   border-radius: 0px; 
 }

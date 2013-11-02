@@ -1,0 +1,47 @@
+@(message: String, 
+  textbookForm: Form[views.formdata.TextbookFormData],
+  conditionTypes: List[String])
+
+@import helper._
+@import bootstrap3._
+
+@Main(message) {
+<div class="container">
+
+  @form(routes.Application.postTextbook(), 'class -> "form-horizontal") {
+    
+    <!-- id -->
+    @hidden(textbookForm("id"))
+    
+    <!-- ISBN -->
+    @text(textbookForm("isbn"),
+          label="ISBN",
+          placeholder="0-316-76953-3", 
+          help="The ISBN of the textbook.")
+          
+    <!-- Title -->
+    @text(textbookForm("title"),
+          label="Title",
+          placeholder="The Catcher in the Rye",
+          help="The title of the book.")
+          
+    <!-- Author -->
+    @text(textbookForm("author"),
+          label="Author",
+          placeholder="J. D. Salinger",
+          help="The author of the book.")    
+    
+    <!-- Condition -->
+    @radiobuttons(textbookForm("condition"),
+                  label="Condition",
+                  buttonNameList=conditionTypes,
+                  help="Select the condition of the textbook.")
+    
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  }
+</div>
+}

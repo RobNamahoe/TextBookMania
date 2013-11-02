@@ -7,10 +7,17 @@ GET     /                           controllers.Application.index()
 
 GET     /newStudent                 controllers.Application.newStudent()
 GET     /showStudents               controllers.Application.showStudents()
-POST    /post                       controllers.Application.postStudent()
+POST    /postStudent                controllers.Application.postStudent()
+GET     /student/:id/edit           controllers.Application.manageStudent(id: Long)
+GET     /student/delete             controllers.Application.deleteStudent(id: Long)
 
-GET     /student/:id/edit          controllers.Application.manageStudent(id: Long)
-GET     /student/delete            controllers.Application.deleteStudent(id: Long)
+GET     /newTextbook                 controllers.Application.newTextbook()
+GET     /showTextbooks               controllers.Application.showTextbooks()
+POST    /postTextbook                controllers.Application.postTextbook()
+GET     /textbook/:id/edit           controllers.Application.manageTextbook(id: Long)
+GET     /textbook/delete             controllers.Application.deleteTextbook(id: Long)
+
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
