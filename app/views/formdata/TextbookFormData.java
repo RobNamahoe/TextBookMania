@@ -69,6 +69,8 @@ public class TextbookFormData {
    * @return null if valid, a list of ValidationErrors if problems are found.
    */
   public List<ValidationError> validate() {
+    
+    final int ISBN_NUM_CHARS = 10;
     List<ValidationError> errors = new ArrayList<>();
     
     if (title == null || title.length() == 0) {
@@ -81,6 +83,13 @@ public class TextbookFormData {
     
     if (isbn == null || isbn.length() == 0) {
       errors.add(new ValidationError("isbn", "ISBN is required."));
+    }
+    else if (isbn.length() != ISBN_NUM_CHARS) {
+      errors.add(new ValidationError("isbn", "ISBN must be 10 characters in length."));
+    }
+    
+    if (!isbn.matches("[0-9]+")) {
+      errors.add(new ValidationError("isbn", "Invalid entry. Numeric characters only."));
     }
     
     if (condition == null || condition.length() == 0) {
@@ -96,12 +105,6 @@ public class TextbookFormData {
     if (TextbookDB.titleExists(id, title)) {
       errors.add(new ValidationError("title", "That title is already in use and cannot be duplicated."));
     }
-    
-    //If coverURL is null then prompt for manual entry
-    if (coverUrl == null || coverUrl.length() == 0) {
-     // errors.add(new ValidationError("coverUrl", "Cover URL is required."));
-    }
-
     
     return errors.isEmpty() ? null : errors;
     

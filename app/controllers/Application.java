@@ -30,18 +30,31 @@ public class Application extends Controller {
   ///////////////////////////////////////////////////////////////////////////////
   // STUDENT METHODS                            
   ///////////////////////////////////////////////////////////////////////////////
+  /**
+   * Returns ManageStudent view configured to add a new student.
+   * @return The page to add a new student.
+   */
   public static Result newStudent() {
     StudentFormData data = new StudentFormData();
     Form<StudentFormData> formData = Form.form(StudentFormData.class).fill(data);
     return ok(ManageStudent.render("NewStudent", formData));
   }
   
+  /**
+   * Handles the editing/managing of student data.
+   * @param id The unique identifier for the student to display.
+   * @return ManageStudent page for requested student with form data.
+   */
   public static Result manageStudent(long id) {
     StudentFormData data = new StudentFormData(StudentDB.getStudent(id));
     Form<StudentFormData> formData = Form.form(StudentFormData.class).fill(data);
     return ok(ManageStudent.render("ManageStudent", formData));
   }
   
+  /**
+   * Handles the posting of form data by the user with validation.
+   * @return ShowStudents page with form data if successful, ManageStudent page if not.
+   */
   public static Result postStudent() {
     Form<StudentFormData> formData = Form.form(StudentFormData.class).bindFromRequest();
     if (formData.hasErrors()) {
@@ -55,10 +68,19 @@ public class Application extends Controller {
     }
   }
 
+  /**
+   * Lists all students currently in the database.
+   * @return ShowStudents page.
+   */
   public static Result showStudents() {
     return ok(ShowStudents.render(StudentDB.getStudents()));
   }
   
+  /**
+   * Handles the deleting of a student from the database.
+   * @param id The id of the student to delete.
+   * @return ShowStudents page.
+   */
   public static Result deleteStudent(long id) {
     StudentDB.deleteStudent(id);
     return ok(ShowStudents.render(StudentDB.getStudents()));
@@ -67,18 +89,31 @@ public class Application extends Controller {
   ///////////////////////////////////////////////////////////////////////////////
   // TEXTBOOK METHODS
   ///////////////////////////////////////////////////////////////////////////////
+  /**
+   * Returns ManageTextbook view configured to add a new textbook.
+   * @return The page to add a new textbook.
+   */
   public static Result newTextbook() {
     TextbookFormData data = new TextbookFormData();
     Form<TextbookFormData> formData = Form.form(TextbookFormData.class).fill(data);
     return ok(ManageTextbook.render("NewTextbook", formData, ConditionTypes.getTypes()));
   }
   
+  /**
+   * Handles the editing/managing of textbook data.
+   * @param id The unique identifier for the textbook to display.
+   * @return ManageTextbook page for requested textbook with form data.
+   */
   public static Result manageTextbook(long id) {
     TextbookFormData data = new TextbookFormData(TextbookDB.getTextbook(id));
     Form<TextbookFormData> formData = Form.form(TextbookFormData.class).fill(data);
     return ok(ManageTextbook.render("ManageTextbook", formData, ConditionTypes.getTypes()));
   }
   
+  /**
+   * Handles the posting of form data by the user with validation.
+   * @return ShowTextbooks page with form data if successful, ManageTextbook page if not.
+   */
   public static Result postTextbook() {
     Form<TextbookFormData> formData = Form.form(TextbookFormData.class).bindFromRequest();
     if (formData.hasErrors()) {
@@ -92,10 +127,19 @@ public class Application extends Controller {
     }
   }
 
+  /**
+   * Lists all textbooks currently in the database.
+   * @return ShowTextbooks page.
+   */
   public static Result showTextbooks() {
     return ok(ShowTextbooks.render(TextbookDB.getTextbooks()));
   }
   
+  /**
+   * Handles the deleting of a textbook from the database.
+   * @param id The id of the textbook to delete.
+   * @return ShowTextbooks page.
+   */
   public static Result deleteTextbook(long id) {
     TextbookDB.deleteTextbook(id);
     return ok(ShowTextbooks.render(TextbookDB.getTextbooks()));

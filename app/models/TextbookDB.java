@@ -22,12 +22,12 @@ public class TextbookDB {
      */
     public static Textbook addTextbook(TextbookFormData formData) {
       long id = (formData.id == 0) ? textbooks.size() + 1 : formData.id;
-      Textbook textbook = new Textbook(id, formData.title, formData.author, formData.isbn, "", formData.condition);
+      Textbook textbook = new Textbook(id, formData.title, formData.author, formData.isbn, 
+                                       formData.coverUrl, formData.condition);
       textbooks.put(id, textbook);
       System.out.println(id + ": " + formData.title + " added.");
       return textbook;
     }
-   
     
     /**
      * Returns a list of textbooks.

@@ -15,9 +15,9 @@
     
     <!-- ISBN -->
     @text(textbookForm("isbn"),
-          label="ISBN",
-          placeholder="0-316-76953-3", 
-          help="The ISBN of the textbook.")
+          label="ISBN-10",
+          placeholder="0316769533", 
+          help="The 10 digit ISBN of the textbook.")
           
     <!-- Title -->
     @text(textbookForm("title"),
@@ -36,6 +36,13 @@
                   label="Condition",
                   buttonNameList=conditionTypes,
                   help="Select the condition of the textbook.")
+    
+    <!-- Cover Url -->
+    @text(textbookForm("coverUrl"),
+          label="Cover URL",
+          placeholder="http://www.image.com",
+          help="The url to an image of the cover of this textbook. We will attempt to pull an "
+             + "image from Amazon but if unsuccessful, you can always enter your own.")    
     
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">

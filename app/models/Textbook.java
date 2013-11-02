@@ -33,7 +33,12 @@ public class Textbook {
     this.title = title;
     this.author = author;
     this.isbn = isbn;
-    this.coverUrl = coverUrl;
+    if (coverUrl == null || coverUrl.length() == 0) {
+      this.coverUrl = getCoverUrlAddress(isbn);
+    }
+    else {
+      this.coverUrl = coverUrl;
+    }
     this.condition = condition;
   }
 
@@ -120,6 +125,17 @@ public class Textbook {
   public void setCondition(String condition) {
     this.condition = condition;
   }
-
+  
+  /**
+   * 
+   */
+   public String getCoverUrlAddress(String coverUrl) {
+     final int ISBN_DIGIT_COUNT = 10;
+     String coverUrlAddress = "";
+     if (this.isbn.length() == ISBN_DIGIT_COUNT) {
+       coverUrlAddress = "http://images.amazon.com/images/P/" + coverUrl + ".01.jpg";
+     }
+     return coverUrlAddress;
+   }
 
 }
