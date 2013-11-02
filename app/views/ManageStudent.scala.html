@@ -1,0 +1,39 @@
+@(message: String, studentForm: Form[views.formdata.StudentFormData])
+
+@import helper._
+@import bootstrap3._
+
+@Main(message) {
+<div class="container">
+
+  @form(routes.Application.postStudent(), 'class -> "form-horizontal") {
+    
+    <!-- id -->
+    @hidden(studentForm("id"))
+    
+    <!-- Name -->
+    @text(studentForm("name"),
+          label="Name",
+          placeholder="John Doe", 
+          help="The name of the student.")
+          
+    <!-- Email -->
+    @text(studentForm("email"),
+          label="Email",
+          placeholder="jdoe@hawaii.edu",
+          help="Email address where you can be reached.")
+          
+    <!-- pic URL -->
+    @text(studentForm("picUrl"),
+          label="Picture URL",
+          placeholder="http://",
+          help="URL to a picture of the student.")
+          
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  }
+</div>
+}

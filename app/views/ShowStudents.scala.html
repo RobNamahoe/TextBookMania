@@ -1,0 +1,27 @@
+@(students: List[Student])
+
+@Main("ShowStudents") {
+   <div class="container">
+     <h1>Current Students</h1>
+     <table class="table table-striped table-bordered">
+       <tr>
+         <th>Picture</th>
+         <th>Name</th>
+         <th>Email</th>
+       </tr>
+       @for(student <- students) {
+       <tr>
+         <td>
+           <div class="student-image" 
+                style="background-image: url('@student.getPicUrl()');">
+           </div>
+         </td>
+         <td>@student.getName()</td>
+         <td>@student.getEmail</td>
+         <td><a href="@routes.Application.manageStudent(student.getId())" class="btn btn-warning btn-xs">Edit</a></td>
+         <td><a href="@routes.Application.deleteStudent(student.getId())" class="btn btn-danger btn-xs">Delete</a></td>         
+       </tr>
+      }
+     </table>
+   </div>
+}
