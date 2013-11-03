@@ -17,6 +17,8 @@ public class SellOfferFormData {
   /**Book ISBN*/
   public String isbn = "";
   
+  /** Email address of the seller. **/
+  public String sellerEmail;
   
   public SellOfferFormData() {
     //Nothing is Initialized
@@ -26,13 +28,15 @@ public class SellOfferFormData {
     this.id = offer.getId();
     this.isbn = offer.getIsbn();
     this.offer = offer.getOffer();
+    this.sellerEmail = offer.getSellerEmail();
   }
 
   
-  public SellOfferFormData(long id, String isbn, int offer) {
+  public SellOfferFormData(long id, String isbn, int offer, String sellerEmail) {
     this.id = id;
     this.isbn = isbn;
     this.offer = offer;
+    this.sellerEmail = sellerEmail;
   }
   
   

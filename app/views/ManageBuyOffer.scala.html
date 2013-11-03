@@ -1,4 +1,4 @@
-@(message: String, offerForm: Form[views.formdata.BuyOfferFormData])
+@(message: String, offerForm: Form[views.formdata.BuyOfferFormData], emailMap: Map[String, Boolean])
 
 @import helper._
 @import bootstrap3._
@@ -10,6 +10,15 @@
     
     <!-- id -->
     @hidden(offerForm("id"))
+    
+
+    <!-- Student Email -->
+    @bootstrap3.select(offerForm("buyerEmail"),
+                       label = "Buyer Email", 
+                       optionMap = emailMap,
+                       isMultiple = false,
+                       help = "Select the buyers email address.")
+    
     
     @text(offerForm("isbn"),
           label = "ISBN",

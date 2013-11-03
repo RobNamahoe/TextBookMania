@@ -1,11 +1,16 @@
 package controllers;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import models.BuyOffer;
+=======
+import java.util.HashMap;
+import java.util.Map;
+>>>>>>> 8cdb24be9619cb7a2a2f8a8b8e11e0e0f839a91f
 import models.BuyOfferDB;
 import models.SellOffer;
 import models.SellOfferDB;
@@ -18,6 +23,7 @@ import views.formdata.BuyOfferFormData;
 import views.formdata.ConditionTypes;
 import views.formdata.MatchFormData;
 import views.formdata.SellOfferFormData;
+import views.formdata.StudentEmails;
 import views.formdata.StudentFormData;
 import views.formdata.TextbookFormData;
 import views.html.Index;
@@ -167,26 +173,33 @@ public class Application extends Controller {
    // BUY OFFER METHODS                                                         //
    ///////////////////////////////////////////////////////////////////////////////
   public static Result newBuyOffer() {
+    Map<String, Boolean> emailMap =  new HashMap<>();
+    emailMap = StudentEmails.getEmails();
     BuyOfferFormData data = new BuyOfferFormData();
     Form<BuyOfferFormData> formData = Form.form(BuyOfferFormData.class).fill(data);
-    return ok(ManageBuyOffer.render("NewBuyOffer", formData));
+    return ok(ManageBuyOffer.render("NewBuyOffer", formData, emailMap));
   }
   
   public static Result manageBuyOffer(long id) {
+    Map<String, Boolean> emailMap =  new HashMap<>();
     BuyOfferFormData data = new BuyOfferFormData(BuyOfferDB.getOffer(id));
     Form<BuyOfferFormData> formData = Form.form(BuyOfferFormData.class).fill(data);
-    return ok(ManageBuyOffer.render("ManageBuyOffer", formData));
+    emailMap = StudentEmails.getEmails(data.buyerEmail);
+    return ok(ManageBuyOffer.render("ManageBuyOffer", formData, emailMap));
   }
   
   public static Result postBuyOffer() {
+    Map<String, Boolean> emailMap =  new HashMap<>();
     Form<BuyOfferFormData> formData = Form.form(BuyOfferFormData.class).bindFromRequest();
     if (formData.hasErrors()) {
       System.out.println("Errors found");
-      return badRequest(ManageBuyOffer.render("", formData));
+      emailMap = StudentEmails.getEmails();
+      return badRequest(ManageBuyOffer.render("", formData, emailMap));
     }
     else {
       BuyOfferFormData data = formData.get();
       BuyOfferDB.addOffer(data);
+      emailMap = StudentEmails.getEmails(data.buyerEmail);
       return ok(ShowBuyOffers.render(BuyOfferDB.getOffers()));
     }
   }
@@ -205,22 +218,28 @@ public class Application extends Controller {
    // SELL OFFER METHODS                                                        //
    ///////////////////////////////////////////////////////////////////////////////
   public static Result newSellOffer() {
+    Map<String, Boolean> emailMap =  new HashMap<>();
+    emailMap = StudentEmails.getEmails();
     SellOfferFormData data = new SellOfferFormData();
     Form<SellOfferFormData> formData = Form.form(SellOfferFormData.class).fill(data);
-    return ok(ManageSellOffer.render("NewSellOffer", formData));
+    return ok(ManageSellOffer.render("NewSellOffer", formData, emailMap));
   }
   
   public static Result manageSellOffer(long id) {
+    Map<String, Boolean> emailMap =  new HashMap<>();
     SellOfferFormData data = new SellOfferFormData(SellOfferDB.getOffer(id));
     Form<SellOfferFormData> formData = Form.form(SellOfferFormData.class).fill(data);
-    return ok(ManageSellOffer.render("ManageSellOffer", formData));
+    emailMap = StudentEmails.getEmails(data.sellerEmail);
+    return ok(ManageSellOffer.render("ManageSellOffer", formData, emailMap));
   }
   
   public static Result postSellOffer() {
+    Map<String, Boolean> emailMap =  new HashMap<>();
     Form<SellOfferFormData> formData = Form.form(SellOfferFormData.class).bindFromRequest();
     if (formData.hasErrors()) {
       System.out.println("Errors found");
-      return badRequest(ManageSellOffer.render("", formData));
+      emailMap = StudentEmails.getEmails();
+      return badRequest(ManageSellOffer.render("", formData, emailMap));
     }
     else {
       SellOfferFormData data = formData.get();

@@ -1,8 +1,12 @@
+import models.BuyOfferDB;
+import models.SellOfferDB;
 import models.StudentDB;
 import models.Textbook;
 import models.TextbookDB;
 import play.Application;
 import play.GlobalSettings;
+import views.formdata.BuyOfferFormData;
+import views.formdata.SellOfferFormData;
 import views.formdata.StudentFormData;
 import views.formdata.TextbookFormData;
 
@@ -23,23 +27,22 @@ public class Global extends GlobalSettings {
     String email;
     String picUrl;
     
+    // Initialize the database with 2 students.
     id = 0;
     name = "Rob Namahoe";
-    email = "rnamahoe@hawaii.edu";
-    picUrl = "http://www.garyottley.com/sites/garyottley.com/files/styles/"
-           + "gallery_thumbnail/public/images/gallery/faces028.jpg";
+    email = "rnamahoe@gmail.com";
+    picUrl = "http://www.clker.com/cliparts/a/p/U/V/U/z/blue-smile-th.png";
     
     StudentDB.addStudent(new StudentFormData(id, name, email, picUrl));
     
     id = 0;
-    name = "Will Haines";
-    email = "whaines@hawaii.edu";
-    picUrl = "http://www.bloodyloud.com/wp-content/gallery/"
-            + "black-white-faces-by-alexander-khokhlov/thumbs/thumbs_b_w_faces_6.jpg";
+    name = "Evan Komiyama";
+    email = "evkomiyama@gmail.com";
+    picUrl = "http://ecx.images-amazon.com/images/I/31LgWpZpj-L._SL500_SS100_.jpg";
     
     StudentDB.addStudent(new StudentFormData(id, name, email, picUrl));
    
-    
+    // Initialize the database with 20 books
     String title;
     String isbn;
     String author;
@@ -181,6 +184,57 @@ public class Global extends GlobalSettings {
     author = "Ian Millington, John Funge";
     condition = "Fair";
     TextbookDB.addTextbook(new TextbookFormData(id, title, author, isbn, coverUrl, condition));
+    
+    // Initialize the database with 5 buy offers
+    int offer = 15;
+    
+    email = "rnamahoe@gmail.com";
+    isbn = "0465051367";
+    BuyOfferDB.addOffer(new BuyOfferFormData(1, isbn, offer, email));
+    
+    offer = 17;
+    isbn = "0123747317";
+    BuyOfferDB.addOffer(new BuyOfferFormData(2, isbn, offer, email));
+    
+    offer = 32;
+    isbn = "1118063333";
+    BuyOfferDB.addOffer(new BuyOfferFormData(3, isbn, offer, email));
+    
+    
+    email = "evkomiyama@gmail.com";
+    offer = 20;
+    isbn = "0470128704";
+    BuyOfferDB.addOffer(new BuyOfferFormData(4, isbn, offer, email));
+    
+    
+    offer = 12;
+    isbn = "0073383090";
+    BuyOfferDB.addOffer(new BuyOfferFormData(5, isbn, offer, email));
+    
+    // Initialize the database with 5 sell offers
+    
+    
+    email = "evkomiyama@gmail.com";
+    isbn = "0465051367";
+    SellOfferDB.addOffer(new SellOfferFormData(1, isbn, offer, email));
+    
+    offer = 17;
+    isbn = "0123747317";
+    SellOfferDB.addOffer(new SellOfferFormData(2, isbn, offer, email));
+    
+    offer = 32;
+    isbn = "1118063333";
+    SellOfferDB.addOffer(new SellOfferFormData(3, isbn, offer, email));
+    
+    
+    email = "rnamahoe@gmail.com";
+    offer = 22;
+    isbn = "0470128704";
+    SellOfferDB.addOffer(new SellOfferFormData(4, isbn, offer, email));
+    
+    offer = 12;
+    isbn = "0073383090";
+    SellOfferDB.addOffer(new SellOfferFormData(5, isbn, offer, email));
     
   }
 
