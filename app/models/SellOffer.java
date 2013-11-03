@@ -13,12 +13,18 @@ private long id = 0;
   
   private String isbn = ""; 
   
+  /** Student ID of the seller. **/
+  private long sellerId;
+  /** Email address of the seller. **/
+  private String sellerEmail;
   
-  public SellOffer(long id, String isbn, int offer, long expiration) {
+  
+  public SellOffer(long id, String isbn, int offer, long expiration, String sellerEmail) {
     this.id = id;
     this.isbn = isbn;
     this.offer = offer;
     this.expiration = expiration;
+    this.setSellerEmail(sellerEmail);
   }
 
 
@@ -95,6 +101,39 @@ private long id = 0;
    */
   public void setIsbn(String isbn) {
     this.isbn = isbn;
+  }
+
+
+  /**
+   * @return the sellerId
+   */
+  public long getSellerId() {
+    return sellerId;
+  }
+
+
+  /**
+   * @param sellerId the sellerId to set
+   */
+  public void setSellerId(long sellerId) {
+    this.sellerId = sellerId;
+  }
+
+
+  /**
+   * @return the sellerEmail
+   */
+  public String getSellerEmail() {
+    return sellerEmail;
+  }
+
+
+  /**
+   * @param sellerEmail the sellerEmail to set
+   */
+  public void setSellerEmail(String sellerEmail) {
+    this.sellerId = StudentDB.getIdFromEmail(sellerEmail);
+    this.sellerEmail = sellerEmail;
   }
 
 }

@@ -206,22 +206,28 @@ public class Application extends Controller {
    // SELL OFFER METHODS                                                        //
    ///////////////////////////////////////////////////////////////////////////////
   public static Result newSellOffer() {
+    Map<String, Boolean> emailMap =  new HashMap<>();
+    emailMap = StudentEmails.getEmails();
     SellOfferFormData data = new SellOfferFormData();
     Form<SellOfferFormData> formData = Form.form(SellOfferFormData.class).fill(data);
-    return ok(ManageSellOffer.render("NewSellOffer", formData));
+    return ok(ManageSellOffer.render("NewSellOffer", formData, emailMap));
   }
   
   public static Result manageSellOffer(long id) {
+    Map<String, Boolean> emailMap =  new HashMap<>();
     SellOfferFormData data = new SellOfferFormData(SellOfferDB.getOffer(id));
     Form<SellOfferFormData> formData = Form.form(SellOfferFormData.class).fill(data);
-    return ok(ManageSellOffer.render("ManageSellOffer", formData));
+    emailMap = StudentEmails.getEmails(data.sellerEmail);
+    return ok(ManageSellOffer.render("ManageSellOffer", formData, emailMap));
   }
   
   public static Result postSellOffer() {
+    Map<String, Boolean> emailMap =  new HashMap<>();
     Form<SellOfferFormData> formData = Form.form(SellOfferFormData.class).bindFromRequest();
     if (formData.hasErrors()) {
       System.out.println("Errors found");
-      return badRequest(ManageSellOffer.render("", formData));
+      emailMap = StudentEmails.getEmails();
+      return badRequest(ManageSellOffer.render("", formData, emailMap));
     }
     else {
       SellOfferFormData data = formData.get();

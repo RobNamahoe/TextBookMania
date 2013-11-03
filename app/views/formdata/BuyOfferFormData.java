@@ -44,10 +44,11 @@ public class BuyOfferFormData {
    * @param isbn The isbn.
    * @param offer the offer.
    */
-  public BuyOfferFormData(long id, String isbn, int offer) {
+  public BuyOfferFormData(long id, String isbn, int offer, String buyerEmail) {
     this.id = id;
     this.isbn = isbn;
     this.offer = offer;
+    this.buyerEmail = buyerEmail;
   }
   
   /**
