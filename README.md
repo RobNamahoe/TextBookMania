@@ -1,4 +1,4 @@
-![screenshot](https://raw.github.com/robnamahoe/textbookmania/doc/textbookmania.jpg)
+![screenshot](https://raw.github.com/robnamahoe/textbookmania/master/doc/textbookmania.jpg)
 
 Overview
 --------
@@ -15,11 +15,11 @@ The application initializes to includes 2 student profiles, 20 textbooks and 5 b
 to find interior pages to create, edit and delete items. Data validation is encluded to ensure appropriate 
 information is provided. 
 
-![screenshot](https://raw.github.com/robnamahoe/textbookmania/doc/studentlist.jpg)
+![screenshot](https://raw.github.com/robnamahoe/textbookmania/master/doc/studentlist.jpg)
 
 The application will pair buyers with sellers and sellers with buyers in the Matches page.
 
-![screenshot](https://raw.github.com/robnamahoe/textbookmania/doc/matches.jpg)
+![screenshot](https://raw.github.com/robnamahoe/TextBookMania/master/doc/matches.jpg)
 
 Credits
 -------
