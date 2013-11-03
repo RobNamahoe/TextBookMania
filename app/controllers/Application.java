@@ -1,6 +1,13 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import models.BuyOffer;
 import models.BuyOfferDB;
+import models.SellOffer;
 import models.SellOfferDB;
 import models.StudentDB;
 import models.TextbookDB;
@@ -9,6 +16,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.formdata.BuyOfferFormData;
 import views.formdata.ConditionTypes;
+import views.formdata.MatchFormData;
 import views.formdata.SellOfferFormData;
 import views.formdata.StudentFormData;
 import views.formdata.TextbookFormData;
@@ -21,6 +29,7 @@ import views.html.ManageBuyOffer;
 import views.html.ManageSellOffer;
 import views.html.ShowBuyOffers;
 import views.html.ShowSellOffers;
+import views.html.MatchPage;
 
 /**
  * Implements the controllers for this application.
@@ -229,6 +238,58 @@ public class Application extends Controller {
     return ok(ShowSellOffers.render(SellOfferDB.getOffers()));
   }
   
+  
+  
+   ///////////////////////////////////////////////////////////////////////////////
+   // MATCH METHODS                                                             //
+   ///////////////////////////////////////////////////////////////////////////////
+   public static Result showMatches(String email) {
+     Map<String, Boolean> emails = new HashMap<>();
+     List<BuyOffer> buyOffers = new ArrayList<>();
+     List<SellOffer> sellOffers = new ArrayList<>();
+     long currentDate = Calendar.getInstance().getTimeInMillis();
+     
+     Form<MatchFormData> formData = Form.form(MatchFormData.class).bindFromRequest();
+     if (formData.hasErrors()) {
+       System.out.println("Errors found");
+       return badRequest(MatchPage.render(formData, emails, buyOffers, sellOffers));
+     }
+     else {
+       MatchFormData data = formData.get();
+       email = data.email;
+     
+     for(int i=1; i <= StudentDB.getStudents().size(); i++) {
+       emails.put(StudentDB.getStudent(i).getEmail(), false);
+     }
+     
+     if(email != "") {
+       boolean isStudent = false;
+       int index = 1;
+       long studentID = 0;
+       while(index <= StudentDB.getStudents().size() && isStudent) {
+         if(StudentDB.getStudent(index).getEmail().equals(email)) {
+           studentID = StudentDB.getStudent(index).getId();
+         }
+       }
+       
+       for(int i=1; i <= BuyOfferDB.getOffers().size(); i++) {
+         if(BuyOfferDB.getOffer(i).getExpiration() <= currentDate && BuyOfferDB.getOffer(i).getId() == studentID) {
+           buyOffers.add(BuyOfferDB.getOffer(i));
+         }
+       }
+     
+       for(int i=1; i <= SellOfferDB.getOffers().size(); i++) {
+         if(SellOfferDB.getOffer(i).getExpiration() <= currentDate && SellOfferDB.getOffer(i).getId() == studentID) {
+           sellOffers.add(SellOfferDB.getOffer(i));
+         }
+       }
+     }
+     
+     }
+     
+     return ok(MatchPage.render(formData, emails, buyOffers, sellOffers));
+     
+   }
   
   
 }

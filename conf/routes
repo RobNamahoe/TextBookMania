@@ -29,6 +29,8 @@ GET     /postSellOffer                controllers.Application.postSellOffer()
 GET     /SellOffer/:id/edit           controllers.Application.manageSellOffer(id: Long)
 GET     /SellOffer/:id/delete         controllers.Application.deleteSellOffer(id: Long)
 
+GET    /showMatches                   controllers.Application.showMatches(email: String)
+
 
 
 # Map static resources from the /public folder to the /assets URL path
