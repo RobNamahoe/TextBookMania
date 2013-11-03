@@ -39,14 +39,14 @@
 
           <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Students<b class="caret"></b></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="@routes.Application.showStudents()">View List</a></li>
-              <li><a href="@routes.Application.newStudent()">Add New</a></li>
+              <li><a href="@routes.Application.showStudents()">View Student List</a></li>
+              <li><a href="@routes.Application.newStudent()">Add New Student</a></li>
             </ul>
           </li>
 
           <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Textbooks<b class="caret"></b></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="@routes.Application.showTextbooks()">View List</a></li>
+              <li><a href="@routes.Application.showTextbooks()">View Textbook List</a></li>
               <li><a href="@routes.Application.newTextbook()">Add New Textbook</a></li>
             </ul>
           </li>
@@ -66,8 +66,13 @@
           </li>
 
            <!-- No dropdown -->
-          <li><a href='@routes.Application.showMatches("")'>Matches</a></li>
-          <li><a href="@routes.Application.help()">Help</a></li>
+           <li class="@("active".when(page == "MatchList"))">
+             <a href="@routes.Application.showMatches("")">Matches</a>
+           </li>
+                     
+           <li class="@("active".when(page == "Help"))">
+             <a href="@routes.Application.help()">Help</a>
+           </li>
 
         </ul>
       </div>
