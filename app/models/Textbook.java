@@ -6,6 +6,10 @@ package models;
  *
  */
 public class Textbook {
+  
+  /** Maximum number of characters in ISBN. */
+  private static final int ISBN_NUM_CHARS = 10;
+  
   /** The textbook id. */
   private long id;
   /** The textbooks title. */
@@ -132,9 +136,8 @@ public class Textbook {
    * @return The url to the book cover on Amazon.
    */
    public String getCoverUrlAddress(String isbn) {
-     final int ISBN_DIGIT_COUNT = 10;
      String coverUrlAddress = "";
-     if (this.isbn.length() == ISBN_DIGIT_COUNT) {
+     if (this.isbn.length() == ISBN_NUM_CHARS) {
        coverUrlAddress = "http://images.amazon.com/images/P/" + isbn + ".01.jpg";
      }
      return coverUrlAddress;

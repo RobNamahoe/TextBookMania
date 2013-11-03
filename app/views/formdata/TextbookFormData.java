@@ -13,6 +13,10 @@ import models.TextbookDB;
  * 
  */
 public class TextbookFormData {
+ 
+  /** Maximum number of characters in ISBN. */
+  private static final int ISBN_NUM_CHARS = 10;
+  
   /** The textbook id. */
   public long id;
   /** The textbooks title. */
@@ -70,7 +74,6 @@ public class TextbookFormData {
    */
   public List<ValidationError> validate() {
     
-    final int ISBN_NUM_CHARS = 10;
     List<ValidationError> errors = new ArrayList<>();
     
     if (title == null || title.length() == 0) {

@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import models.BuyOffer;
-import java.util.HashMap;
-import java.util.Map;
 import models.BuyOfferDB;
 import models.SellOffer;
 import models.SellOfferDB;
@@ -48,7 +46,10 @@ public class Application extends Controller {
     return ok(Index.render("Your new application is ready."));
   }
   
-  
+  /**
+   * Returns the help page.
+   * @return The system help page.
+   */
   public static Result help() {
     return ok(Help.render(""));
   }
@@ -190,7 +191,7 @@ public class Application extends Controller {
   
   /**
    * Edit page for buy offers.
-   * @param id
+   * @param id the id of the buy offer.
    * @return ManageBuyOffer page
    */
   public static Result manageBuyOffer(long id) {
@@ -231,7 +232,7 @@ public class Application extends Controller {
   
   /**
    * Deletes a buy offer with a given id.
-   * @param id
+   * @param id The id of the buy offer.
    * @return ShowBuyOffers page
    */
   public static Result deleteBuyOffer(long id) {
@@ -257,7 +258,7 @@ public class Application extends Controller {
   
   /**
    * Edit page for sell offers.
-   * @param id
+   * @param id The id of the sell offer.
    * @return ManageSellOffer page
    */
   public static Result manageSellOffer(long id) {
@@ -297,7 +298,7 @@ public class Application extends Controller {
   
   /**
    * Deletes a sell offer with a given id.
-   * @param id
+   * @param id The id of the sell offer.
    * @return ShowSellOffers page
    */
   public static Result deleteSellOffer(long id) {
@@ -312,7 +313,7 @@ public class Application extends Controller {
    ///////////////////////////////////////////////////////////////////////////////
   /**
    * Shows buyer and seller matches to a given student.
-   * @param email
+   * @param email The selected email.
    * @return MatchPage page
    */
    public static Result showMatches(String email) {

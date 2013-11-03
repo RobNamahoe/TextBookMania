@@ -24,7 +24,6 @@ public class StudentDB {
       long id = (formData.id == 0) ? students.size() + 1 : formData.id;
       Student student = new Student(id, formData.name, formData.email, formData.picUrl);
       students.put(id, student);
-      System.out.println(id + ": " + formData.name + " added.");
       return student;
     }
    

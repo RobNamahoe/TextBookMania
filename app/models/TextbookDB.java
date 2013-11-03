@@ -25,7 +25,6 @@ public class TextbookDB {
       Textbook textbook = new Textbook(id, formData.title, formData.author, formData.isbn, 
                                        formData.coverUrl, formData.condition);
       textbooks.put(id, textbook);
-      System.out.println(id + ": " + formData.title + " added.");
       return textbook;
     }
     
