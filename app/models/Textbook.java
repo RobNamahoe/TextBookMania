@@ -113,7 +113,7 @@ public class Textbook {
   }
 
   /**
-   * @return the condition
+   * @return the condition of the textbook.
    */
   public String getCondition() {
     return condition;
@@ -127,13 +127,15 @@ public class Textbook {
   }
   
   /**
-   * 
+   * Generate url to book cover on Amazon.
+   * @param isbn The ISBN of the book.
+   * @return The url to the book cover on Amazon.
    */
-   public String getCoverUrlAddress(String coverUrl) {
+   public String getCoverUrlAddress(String isbn) {
      final int ISBN_DIGIT_COUNT = 10;
      String coverUrlAddress = "";
      if (this.isbn.length() == ISBN_DIGIT_COUNT) {
-       coverUrlAddress = "http://images.amazon.com/images/P/" + coverUrl + ".01.jpg";
+       coverUrlAddress = "http://images.amazon.com/images/P/" + isbn + ".01.jpg";
      }
      return coverUrlAddress;
    }

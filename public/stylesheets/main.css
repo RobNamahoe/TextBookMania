@@ -5,10 +5,12 @@
   height: 200px;
 }
 
-.carousel-image {
-  background-size: cover;
-  background-position: center;
-  height: 500px;
+.footer {
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-color: white;
+  background-color: #406792;
 }
 
 .student-image {
@@ -26,6 +28,7 @@
 
 .navbar {
   border-radius: 0px; 
+  background-color: #558C89;
 }
 
 .well {
@@ -38,4 +41,11 @@ h1 {
   margin: 0;
 }
 
+p {
+  margin-top: 10px;
+  color: white;
+}
 
+body {
+  background-color: #ECECEA;
+}
