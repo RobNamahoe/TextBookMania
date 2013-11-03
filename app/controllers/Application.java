@@ -1,16 +1,13 @@
 package controllers;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import models.BuyOffer;
-=======
 import java.util.HashMap;
 import java.util.Map;
->>>>>>> 8cdb24be9619cb7a2a2f8a8b8e11e0e0f839a91f
 import models.BuyOfferDB;
 import models.SellOffer;
 import models.SellOfferDB;
@@ -292,13 +289,13 @@ public class Application extends Controller {
        }
        
        for(int i=1; i <= BuyOfferDB.getOffers().size(); i++) {
-         if(BuyOfferDB.getOffer(i).getExpiration() <= currentDate && BuyOfferDB.getOffer(i).getId() == studentID) {
+         if(BuyOfferDB.getOffer(i).getExpiration() <= currentDate && BuyOfferDB.getOffer(i).getBuyerId() == studentID) {
            buyOffers.add(BuyOfferDB.getOffer(i));
          }
        }
      
        for(int i=1; i <= SellOfferDB.getOffers().size(); i++) {
-         if(SellOfferDB.getOffer(i).getExpiration() <= currentDate && SellOfferDB.getOffer(i).getId() == studentID) {
+         if(SellOfferDB.getOffer(i).getExpiration() <= currentDate && SellOfferDB.getOffer(i).getSellerId() == studentID) {
            sellOffers.add(SellOfferDB.getOffer(i));
          }
        }

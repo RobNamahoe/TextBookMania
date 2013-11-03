@@ -1,9 +1,5 @@
 package views.formdata;
 
-import java.util.ArrayList;
-import java.util.List;
-import play.data.validation.ValidationError;
-
 public class MatchFormData {
   
   /**Student Email*/
