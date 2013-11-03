@@ -38,6 +38,18 @@ public class StudentDB {
     }
     
     /**
+     * Returns a list of the students email addresses.
+     * @return A list of email addresses.
+     */
+    public static List<String> getEmailAddresses() {
+      List<String> addresses = new ArrayList<>();
+      for (Map.Entry<Long, Student> student : students.entrySet()) {
+        addresses.add(student.getValue().getEmail());
+      }
+      return addresses;
+    }
+    
+    /**
      * Returns the student associated with the passed id.
      * @param id The students id.
      * @return The requested student.
@@ -45,6 +57,21 @@ public class StudentDB {
     public static Student getStudent(long id) {
       Student student = students.get(id);
       return student;
+    }
+    
+    
+    /**
+     * Get a student id from an email address.
+     * @param email The email address of the student.
+     * @return id The id of the student with the associated email.
+     */
+    public static long getIdFromEmail(String email) {
+      for (Map.Entry<Long, Student> student : students.entrySet()) {
+        if (email.equals(student.getValue().getEmail())) {
+          return student.getKey();
+        }
+      }
+      return 0;
     }
     
     /**

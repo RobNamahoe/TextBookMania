@@ -6,19 +6,24 @@ import java.util.Calendar;
 
 public class BuyOffer {
   private long id = 0;
-  
+ 
   private int offer = 0;
   
   private long expiration = 0;
   
   private String isbn = "";
   
+  /** Student ID of the buyer. **/
+  private long buyerId;
+  /** Email address of the buyer. **/
+  private String buyerEmail;
   
-  public BuyOffer(long id, String isbn, int offer, long expiration) {
+  public BuyOffer(long id, String isbn, int offer, long expiration, String buyerEmail) {
     this.id = id;
     this.setIsbn(isbn);
     this.offer = offer;
     this.expiration = expiration;
+    this.buyerEmail = buyerEmail;
   }
 
 
@@ -63,7 +68,7 @@ public class BuyOffer {
 
 
   /**
-   * @param offerTime the offerTime to set
+   * @param offerTime the offerTime to set.
    */
   public void setExpiration(long expiration) {
     this.expiration = expiration;
@@ -95,6 +100,40 @@ public class BuyOffer {
    */
   public void setIsbn(String isbn) {
     this.isbn = isbn;
+  }
+
+
+  /**
+   * @return the buyerId
+   */
+  public long getBuyerId() {
+    return buyerId;
+  }
+
+
+  /**
+   * @param buyerId the buyerId to set
+   */
+  public void setBuyerId(long buyerId) {
+    this.buyerId = buyerId;
+  }
+
+
+  /**
+   * @return the buyerEmail
+   */
+  public String getBuyerEmail() {
+    return buyerEmail;
+  }
+
+
+  /**
+   * @param buyerEmail the buyerEmail to set
+   */
+  public void setBuyerEmail(String buyerEmail) {
+    this.buyerId = StudentDB.getIdFromEmail(buyerEmail);
+    this.buyerEmail = buyerEmail;
+    
   }
 
 
