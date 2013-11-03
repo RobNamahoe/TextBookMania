@@ -263,17 +263,18 @@ public class Application extends Controller {
      Map<String, Boolean> emails = new HashMap<>();
      List<BuyOffer> buyOffers = new ArrayList<>();
      List<SellOffer> sellOffers = new ArrayList<>();
+     List<BuyOffer> buyers = new ArrayList<>();
      long currentDate = Calendar.getInstance().getTimeInMillis();
      
      Form<MatchFormData> formData = Form.form(MatchFormData.class).bindFromRequest();
      if (formData.hasErrors()) {
        System.out.println("Errors found");
-       return badRequest(MatchPage.render(formData, emails, buyOffers, sellOffers));
+       return badRequest(MatchPage.render(formData, emails, buyOffers, sellOffers, buyers));
      }
      else {
        MatchFormData data = formData.get();
        email = data.email;
-     
+       
      for(int i=1; i <= StudentDB.getStudents().size(); i++) {
        emails.put(StudentDB.getStudent(i).getEmail(), false);
      }
@@ -282,28 +283,42 @@ public class Application extends Controller {
        boolean isStudent = false;
        int index = 1;
        long studentID = 0;
-       while(index <= StudentDB.getStudents().size() && isStudent) {
+       while(index <= StudentDB.getStudents().size() && (! isStudent)) {
          if(StudentDB.getStudent(index).getEmail().equals(email)) {
            studentID = StudentDB.getStudent(index).getId();
+           isStudent = true;
          }
+         index++;
        }
        
-       for(int i=1; i <= BuyOfferDB.getOffers().size(); i++) {
-         if(BuyOfferDB.getOffer(i).getExpiration() <= currentDate && BuyOfferDB.getOffer(i).getBuyerId() == studentID) {
-           buyOffers.add(BuyOfferDB.getOffer(i));
+       if(isStudent) {
+         
+         for(int i=1; i <= BuyOfferDB.getOffers().size(); i++) {
+           if(BuyOfferDB.getOffer(i).getExpiration() >= currentDate && BuyOfferDB.getOffer(i).getBuyerId() == studentID) {
+             buyOffers.add(BuyOfferDB.getOffer(i));
+           }
          }
-       }
      
-       for(int i=1; i <= SellOfferDB.getOffers().size(); i++) {
-         if(SellOfferDB.getOffer(i).getExpiration() <= currentDate && SellOfferDB.getOffer(i).getSellerId() == studentID) {
-           sellOffers.add(SellOfferDB.getOffer(i));
+         for(int i=1; i <= SellOfferDB.getOffers().size(); i++) {
+           if(SellOfferDB.getOffer(i).getExpiration() >= currentDate && SellOfferDB.getOffer(i).getSellerId() == studentID) {
+             sellOffers.add(SellOfferDB.getOffer(i));
+           }
          }
+         
+         for(int i=0; i < sellOffers.size(); i++) {
+           for(int k=1; k <= BuyOfferDB.getOffers().size(); k++) {
+             if(sellOffers.get(i).getIsbn() == BuyOfferDB.getOffer(k).getIsbn()) {
+               buyers.add(BuyOfferDB.getOffer(k));
+             }
+           }
+         }
+         
        }
      }
      
      }
      
-     return ok(MatchPage.render(formData, emails, buyOffers, sellOffers));
+     return ok(MatchPage.render(formData, emails, buyOffers, sellOffers, buyers));
      
    }
   

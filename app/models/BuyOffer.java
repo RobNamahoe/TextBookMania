@@ -23,7 +23,7 @@ public class BuyOffer {
     this.setIsbn(isbn);
     this.offer = offer;
     this.expiration = expiration;
-    this.buyerEmail = buyerEmail;
+    this.setBuyerEmail(buyerEmail);
   }
 
 

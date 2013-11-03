@@ -1,4 +1,4 @@
-@(matchForm: Form[views.formdata.MatchFormData], emails: Map[String, Boolean], buyOffers: List[BuyOffer], sellOffer: List[SellOffer])
+@(matchForm: Form[views.formdata.MatchFormData], emails: Map[String, Boolean], buyOffers: List[BuyOffer], sellOffers: List[SellOffer], buyers: List[BuyOffer])
 
 
 @import helper._
@@ -6,7 +6,7 @@
 
 @Main("MatchList") {
 <div class="container">
-<h1>Find Matching Offers</h1>
+<h1>Find Offers</h1>
   @form(routes.Application.showMatches(""), 'class -> "form-horizontal") {
     
   @bootstrap3.select(matchForm("email"),
@@ -14,12 +14,73 @@
                      optionMap = emails,
                      isMultiple = false,
                      help = "")
-          
-    <div class="form-group">
+      
+     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-primary">Find</button>
+        <button type="submit" class="btn btn-primary">Find Matches</button>
       </div>
     </div>
+                     
+     @if(! buyOffers.isEmpty()) {
+     <h1>My Buy Offers</h1>
+     <table class="table table-striped table-bordered">
+       <tr>
+         <th>Student Email</th>
+         <th>ISBN</th>
+         <th>Offer</th>
+         <th>Expires</th>
+       </tr>
+       @for(buyOffer <- buyOffers) {
+       <tr>
+         <td>@buyOffer.getBuyerEmail()</td>
+         <td>@buyOffer.getIsbn()</td>
+         <td>$@buyOffer.getOffer()</td>
+         <td>@buyOffer.getExpirationDate()</td>       
+       </tr>
+       }
+     </table>
+     }
+     
+     
+     @if(! sellOffers.isEmpty()) {
+     <h1>My Sell Offers</h1>
+     <table class="table table-striped table-bordered">
+       <tr>
+         <th>Student Email</th>
+         <th>ISBN</th>
+         <th>Offer</th>
+         <th>Expires</th>
+       </tr>
+       @for(sellOffer <- sellOffers) {
+       <tr>
+         <td>@sellOffer.getSellerEmail()</td>
+         <td>@sellOffer.getIsbn()</td>
+         <td>$@sellOffer.getOffer()</td>
+         <td>@sellOffer.getExpirationDate()</td>       
+       </tr>
+       }
+     </table>
+     }
+     
+     @if(! buyers.isEmpty()) {
+          <h1>Potential Buyers</h1>
+     <table class="table table-striped table-bordered">
+       <tr>
+         <th>Student Email</th>
+         <th>ISBN</th>
+         <th>Offer</th>
+         <th>Expires</th>
+       </tr>
+       @for(buyer <- buyers) {
+       <tr>
+         <td>@buyer.getBuyerEmail()</td>
+         <td>@buyer.getIsbn()</td>
+         <td>$@buyer.getOffer()</td>
+         <td>@buyer.getExpirationDate()</td>       
+       </tr>
+        }
+     </table>
+      }
   }
 </div>
 }
