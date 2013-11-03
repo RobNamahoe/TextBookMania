@@ -24,4 +24,4 @@ The application will pair buyers with sellers and sellers with buyers in the Mat
 Credits
 -------
 Created by [Evan Komiyama](https://github.com/ekomiyama) and [Rob Namahoe](https://github.com/RobNamahoe).
-Mahalo to ICS 341, Fall 2013 for support.
+Mahalo to ICS 341, Fall 2013 for support. 
