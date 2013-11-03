@@ -175,6 +175,11 @@ public class Application extends Controller {
    ///////////////////////////////////////////////////////////////////////////////
    // BUY OFFER METHODS                                                         //
    ///////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   * Add offer page for buy offers.
+   * @return ManageBuyOffer page
+   */
   public static Result newBuyOffer() {
     Map<String, Boolean> emailMap =  new HashMap<>();
     emailMap = StudentEmails.getEmails();
@@ -183,6 +188,11 @@ public class Application extends Controller {
     return ok(ManageBuyOffer.render("NewBuyOffer", formData, emailMap));
   }
   
+  /**
+   * Edit page for buy offers.
+   * @param id
+   * @return ManageBuyOffer page
+   */
   public static Result manageBuyOffer(long id) {
     Map<String, Boolean> emailMap =  new HashMap<>();
     BuyOfferFormData data = new BuyOfferFormData(BuyOfferDB.getOffer(id));
@@ -191,6 +201,10 @@ public class Application extends Controller {
     return ok(ManageBuyOffer.render("ManageBuyOffer", formData, emailMap));
   }
   
+  /**
+   * Handles the validation and adding of a buy offer to the database.
+   * @return ShowBuyOffers
+   */
   public static Result postBuyOffer() {
     Map<String, Boolean> emailMap =  new HashMap<>();
     Form<BuyOfferFormData> formData = Form.form(BuyOfferFormData.class).bindFromRequest();
@@ -207,10 +221,19 @@ public class Application extends Controller {
     }
   }
 
+  /**
+   * Adds current list of buy offers to the ShowBuyOffers page.
+   * @return ShowBuyOffers page
+   */
   public static Result showBuyOffers() {
     return ok(ShowBuyOffers.render(BuyOfferDB.getOffers()));
   }
   
+  /**
+   * Deletes a buy offer with a given id.
+   * @param id
+   * @return ShowBuyOffers page
+   */
   public static Result deleteBuyOffer(long id) {
     BuyOfferDB.deleteOffer(id);
     return ok(ShowBuyOffers.render(BuyOfferDB.getOffers()));
@@ -220,6 +243,10 @@ public class Application extends Controller {
    ///////////////////////////////////////////////////////////////////////////////
    // SELL OFFER METHODS                                                        //
    ///////////////////////////////////////////////////////////////////////////////
+  /**
+   * Add new sell offer page.
+   * @return ManageSellOffer page
+   */
   public static Result newSellOffer() {
     Map<String, Boolean> emailMap =  new HashMap<>();
     emailMap = StudentEmails.getEmails();
@@ -228,6 +255,11 @@ public class Application extends Controller {
     return ok(ManageSellOffer.render("NewSellOffer", formData, emailMap));
   }
   
+  /**
+   * Edit page for sell offers.
+   * @param id
+   * @return ManageSellOffer page
+   */
   public static Result manageSellOffer(long id) {
     Map<String, Boolean> emailMap =  new HashMap<>();
     SellOfferFormData data = new SellOfferFormData(SellOfferDB.getOffer(id));
@@ -236,6 +268,10 @@ public class Application extends Controller {
     return ok(ManageSellOffer.render("ManageSellOffer", formData, emailMap));
   }
   
+  /**
+   * Handles the validation and adding of new sell offers.
+   * @return ShowSellOffers page
+   */
   public static Result postSellOffer() {
     Map<String, Boolean> emailMap =  new HashMap<>();
     Form<SellOfferFormData> formData = Form.form(SellOfferFormData.class).bindFromRequest();
@@ -251,10 +287,19 @@ public class Application extends Controller {
     }
   }
 
+  /**
+   * Adds a list of current sell offers to ShowSellOffers page.
+   * @return ShowSellOffers page
+   */
   public static Result showSellOffers() {
     return ok(ShowSellOffers.render(SellOfferDB.getOffers()));
   }
   
+  /**
+   * Deletes a sell offer with a given id.
+   * @param id
+   * @return ShowSellOffers page
+   */
   public static Result deleteSellOffer(long id) {
     SellOfferDB.deleteOffer(id);
     return ok(ShowSellOffers.render(SellOfferDB.getOffers()));
@@ -265,6 +310,11 @@ public class Application extends Controller {
    ///////////////////////////////////////////////////////////////////////////////
    // MATCH METHODS                                                             //
    ///////////////////////////////////////////////////////////////////////////////
+  /**
+   * Shows buyer and seller matches to a given student.
+   * @param email
+   * @return MatchPage page
+   */
    public static Result showMatches(String email) {
      Map<String, Boolean> emails = new HashMap<>();
      List<BuyOffer> buyOffers = new ArrayList<>();
@@ -281,39 +331,41 @@ public class Application extends Controller {
        MatchFormData data = formData.get();
        email = data.email;
        
-     for(int i=1; i <= StudentDB.getStudents().size(); i++) {
+     for (int i = 1; i <= StudentDB.getStudents().size(); i++) {
        emails.put(StudentDB.getStudent(i).getEmail(), false);
      }
      
-     if(email != "") {
+     if (email != "") {
        boolean isStudent = false;
        int index = 1;
        long studentID = 0;
-       while(index <= StudentDB.getStudents().size() && (! isStudent)) {
-         if(StudentDB.getStudent(index).getEmail().equals(email)) {
+       while (index <= StudentDB.getStudents().size() && (!isStudent)) {
+         if (StudentDB.getStudent(index).getEmail().equals(email)) {
            studentID = StudentDB.getStudent(index).getId();
            isStudent = true;
          }
          index++;
        }
        
-       if(isStudent) {
+       if (isStudent) {
          
-         for(int i=1; i <= BuyOfferDB.getOffers().size(); i++) {
-           if(BuyOfferDB.getOffer(i).getExpiration() >= currentDate && BuyOfferDB.getOffer(i).getBuyerId() == studentID) {
+         for (int i = 1; i <= BuyOfferDB.getOffers().size(); i++) {
+           if (BuyOfferDB.getOffer(i).getExpiration() >= currentDate 
+               && BuyOfferDB.getOffer(i).getBuyerId() == studentID) {
              buyOffers.add(BuyOfferDB.getOffer(i));
            }
          }
      
-         for(int i=1; i <= SellOfferDB.getOffers().size(); i++) {
-           if(SellOfferDB.getOffer(i).getExpiration() >= currentDate && SellOfferDB.getOffer(i).getSellerId() == studentID) {
+         for (int i = 1; i <= SellOfferDB.getOffers().size(); i++) {
+           if (SellOfferDB.getOffer(i).getExpiration() >= currentDate
+               && SellOfferDB.getOffer(i).getSellerId() == studentID) {
              sellOffers.add(SellOfferDB.getOffer(i));
            }
          }
          
-         for(int i=0; i < sellOffers.size(); i++) {
-           for(int k=1; k <= BuyOfferDB.getOffers().size(); k++) {
-             if(sellOffers.get(i).getIsbn() == BuyOfferDB.getOffer(k).getIsbn()) {
+         for (int i = 0; i < sellOffers.size(); i++) {
+           for (int k = 1; k <= BuyOfferDB.getOffers().size(); k++) {
+             if (sellOffers.get(i).getIsbn() == BuyOfferDB.getOffer(k).getIsbn()) {
                buyers.add(BuyOfferDB.getOffer(k));
              }
            }

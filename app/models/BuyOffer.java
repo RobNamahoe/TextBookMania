@@ -4,6 +4,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * Offers to buy a certain textbook in the store.
+ * @author User1
+ *
+ */
 public class BuyOffer {
   private long id = 0;
  
@@ -18,6 +23,14 @@ public class BuyOffer {
   /** Email address of the buyer. **/
   private String buyerEmail;
   
+  /**
+   * Initializes a BuyOffer object.
+   * @param id
+   * @param isbn
+   * @param offer
+   * @param expiration
+   * @param buyerEmail
+   */
   public BuyOffer(long id, String isbn, int offer, long expiration, String buyerEmail) {
     this.id = id;
     this.setIsbn(isbn);
@@ -68,15 +81,17 @@ public class BuyOffer {
 
 
   /**
-   * @param offerTime the offerTime to set.
+   * Sets the expiration time.
+   * @param expiration
    */
   public void setExpiration(long expiration) {
     this.expiration = expiration;
   }
   
   /**
+   * Returns expiration date in MM/dd/yyyy hh:mm:ss.SSS form.
    * @param expiration
-   * @return
+   * @return String
    */
   public String getExpirationDate() {
     DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss.SSS");

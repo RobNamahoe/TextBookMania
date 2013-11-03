@@ -25,7 +25,8 @@ public class SellOfferDB {
     long id = (formData.id == 0) ? offers.size() + 1 : formData.id;
     Calendar currentDate = Calendar.getInstance();
     Calendar expirationDate = currentDate;
-    expirationDate.add(Calendar.DAY_OF_MONTH, 30);
+    int daysUntilExpiration = 30;
+    expirationDate.add(Calendar.DAY_OF_MONTH, daysUntilExpiration);
     SellOffer sellOffer = new SellOffer(id, formData.isbn, formData.offer, expirationDate.getTimeInMillis(),
                                         formData.sellerEmail);
     offers.put(id, sellOffer);
@@ -35,7 +36,7 @@ public class SellOfferDB {
   
   /**
    * Returns the whole sell offer list.
-   * @return
+   * @return List
    */
   public static List<SellOffer> getOffers() {
     return new ArrayList<>(offers.values());
@@ -44,7 +45,7 @@ public class SellOfferDB {
   /**
    * Returns an offer with the given id.
    * @param id
-   * @return
+   * @return sellOffer
    */
   public static SellOffer getOffer(long id) {
     SellOffer sellOffer = offers.get(id);
