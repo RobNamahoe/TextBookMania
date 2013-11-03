@@ -33,6 +33,7 @@ import views.html.ManageSellOffer;
 import views.html.ShowBuyOffers;
 import views.html.ShowSellOffers;
 import views.html.MatchPage;
+import views.html.Help;
 
 /**
  * Implements the controllers for this application.
@@ -45,6 +46,11 @@ public class Application extends Controller {
    */
   public static Result index() {
     return ok(Index.render("Your new application is ready."));
+  }
+  
+  
+  public static Result help() {
+    return ok(Help.render(""));
   }
   
   ///////////////////////////////////////////////////////////////////////////////
@@ -321,6 +327,5 @@ public class Application extends Controller {
      return ok(MatchPage.render(formData, emails, buyOffers, sellOffers, buyers));
      
    }
-  
-  
+
 }
