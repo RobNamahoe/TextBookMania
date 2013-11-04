@@ -6,14 +6,14 @@
      <table class="table table-striped table-bordered panel panel-info">
        <tr>
          <th>Student Email</th>
-         <th>ISBN</th>
+         <th>Title</th>
          <th>Offer</th>
          <th>Expires</th>
        </tr>
        @for(offer <- offers) {
        <tr>
          <td>@offer.getSellerEmail()</td>
-         <td>@offer.getIsbn()</td>
+         <td>@offer.getTitle()</td>
          <td>$@offer.getOffer()</td>
          <td>@offer.getExpirationDate()</td>
          <td><a href="@routes.Application.manageSellOffer(offer.getId())" class="btn btn-warning btn-xs">Edit</a></td>

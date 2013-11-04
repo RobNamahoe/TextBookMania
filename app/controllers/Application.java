@@ -186,7 +186,7 @@ public class Application extends Controller {
     emailMap = StudentEmails.getEmails();
     BuyOfferFormData data = new BuyOfferFormData();
     Form<BuyOfferFormData> formData = Form.form(BuyOfferFormData.class).fill(data);
-    return ok(ManageBuyOffer.render("NewBuyOffer", formData, emailMap));
+    return ok(ManageBuyOffer.render("NewBuyOffer", formData, emailMap, TextbookDB.getTitles()));
   }
   
   /**
@@ -199,7 +199,7 @@ public class Application extends Controller {
     BuyOfferFormData data = new BuyOfferFormData(BuyOfferDB.getOffer(id));
     Form<BuyOfferFormData> formData = Form.form(BuyOfferFormData.class).fill(data);
     emailMap = StudentEmails.getEmails(data.buyerEmail);
-    return ok(ManageBuyOffer.render("ManageBuyOffer", formData, emailMap));
+    return ok(ManageBuyOffer.render("ManageBuyOffer", formData, emailMap, TextbookDB.getTitles(data.title)));
   }
   
   /**
@@ -212,7 +212,7 @@ public class Application extends Controller {
     if (formData.hasErrors()) {
       System.out.println("Errors found");
       emailMap = StudentEmails.getEmails();
-      return badRequest(ManageBuyOffer.render("", formData, emailMap));
+      return badRequest(ManageBuyOffer.render("", formData, emailMap, TextbookDB.getTitles()));
     }
     else {
       BuyOfferFormData data = formData.get();
@@ -253,7 +253,7 @@ public class Application extends Controller {
     emailMap = StudentEmails.getEmails();
     SellOfferFormData data = new SellOfferFormData();
     Form<SellOfferFormData> formData = Form.form(SellOfferFormData.class).fill(data);
-    return ok(ManageSellOffer.render("NewSellOffer", formData, emailMap));
+    return ok(ManageSellOffer.render("NewSellOffer", formData, emailMap, TextbookDB.getTitles()));
   }
   
   /**
@@ -266,7 +266,7 @@ public class Application extends Controller {
     SellOfferFormData data = new SellOfferFormData(SellOfferDB.getOffer(id));
     Form<SellOfferFormData> formData = Form.form(SellOfferFormData.class).fill(data);
     emailMap = StudentEmails.getEmails(data.sellerEmail);
-    return ok(ManageSellOffer.render("ManageSellOffer", formData, emailMap));
+    return ok(ManageSellOffer.render("ManageSellOffer", formData, emailMap, TextbookDB.getTitles(data.title)));
   }
   
   /**
@@ -279,7 +279,7 @@ public class Application extends Controller {
     if (formData.hasErrors()) {
       System.out.println("Errors found");
       emailMap = StudentEmails.getEmails();
-      return badRequest(ManageSellOffer.render("", formData, emailMap));
+      return badRequest(ManageSellOffer.render("", formData, emailMap, TextbookDB.getTitles()));
     }
     else {
       SellOfferFormData data = formData.get();

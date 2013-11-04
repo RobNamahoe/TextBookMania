@@ -49,13 +49,18 @@ public class Global extends GlobalSettings {
     String coverUrl;
     String condition;
     
-    //#1 is missing
+    //#1 ISBN was invalid, used Play for Java instead.
+    title = "Play for Java, Covers Play 2";
+    isbn = "1617290904";
+    author = "Nicolas Leroux and Sietse de Kaper";
+    coverUrl = "";
+    condition = "Excellent";
+    TextbookDB.addTextbook(new TextbookFormData(id, title, author, isbn, coverUrl, condition));
     
     //#2
     title = "Java Concepts: Compatible with Java 5, 6 and 7";
     isbn = "0470509473";
     author = "Cay S. Horstmann";
-    coverUrl = "";
     condition = "Excellent";
     TextbookDB.addTextbook(new TextbookFormData(id, title, author, isbn, coverUrl, condition));
     

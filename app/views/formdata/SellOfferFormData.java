@@ -20,6 +20,9 @@ public class SellOfferFormData {
   /** Email address of the seller. **/
   public String sellerEmail;
   
+  /** Textbook Title. **/
+  public String title; 
+  
   public SellOfferFormData() {
     //Nothing is Initialized
   }
@@ -29,6 +32,7 @@ public class SellOfferFormData {
     this.isbn = offer.getIsbn();
     this.offer = offer.getOffer();
     this.sellerEmail = offer.getSellerEmail();
+    this.title = offer.getTitle();
   }
 
   
@@ -37,6 +41,7 @@ public class SellOfferFormData {
     this.isbn = isbn;
     this.offer = offer;
     this.sellerEmail = sellerEmail;
+    this.title = TextbookDB.getTitleFromIsbn(isbn);
   }
   
   
@@ -52,11 +57,10 @@ public class SellOfferFormData {
       index++;
     }
     
-    if(isbn == "") {
-      errors.add(new ValidationError("isbn", "Textbook ISBN is Required.")); 
-    }else if(! found) {
-      errors.add(new ValidationError("isbn", "Textbook ISBN is not valid."));
+    if (title == null || title.length() == 0) {
+      errors.add(new ValidationError("title", "Textbook title is required."));
     }
+    
     if(offer != (int)offer) {
       errors.add(new ValidationError("offer", "Offer Should Only be a Whole Number."));
     }

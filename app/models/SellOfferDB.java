@@ -28,7 +28,7 @@ public class SellOfferDB {
     int daysUntilExpiration = 30;
     expirationDate.add(Calendar.DAY_OF_MONTH, daysUntilExpiration);
     SellOffer sellOffer = new SellOffer(id, formData.isbn, formData.offer, expirationDate.getTimeInMillis(),
-                                        formData.sellerEmail);
+                                        formData.sellerEmail, formData.title);
     offers.put(id, sellOffer);
     System.out.println(id + ": " + formData.isbn + " added.");
     return sellOffer;

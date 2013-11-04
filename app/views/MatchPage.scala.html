@@ -27,14 +27,14 @@
      <table class="table table-striped table-bordered">
        <tr>
          <th>Student Email</th>
-         <th>ISBN</th>
+         <th>Title</th>
          <th>Offer</th>
          <th>Expires</th>
        </tr>
        @for(buyOffer <- buyOffers) {
        <tr>
          <td>@buyOffer.getBuyerEmail()</td>
-         <td>@buyOffer.getIsbn()</td>
+         <td>@buyOffer.getTitle()</td>
          <td>$@buyOffer.getOffer()</td>
          <td>@buyOffer.getExpirationDate()</td>       
        </tr>
@@ -49,14 +49,14 @@
      <table class="table table-striped table-bordered">
        <tr>
          <th>Student Email</th>
-         <th>ISBN</th>
+         <th>Title</th>
          <th>Offer</th>
          <th>Expires</th>
        </tr>
        @for(sellOffer <- sellOffers) {
        <tr>
          <td>@sellOffer.getSellerEmail()</td>
-         <td>@sellOffer.getIsbn()</td>
+         <td>@sellOffer.getTitle()</td>
          <td>$@sellOffer.getOffer()</td>
          <td>@sellOffer.getExpirationDate()</td>       
        </tr>
@@ -71,14 +71,14 @@
      <table class="table table-striped table-bordered">
        <tr>
          <th>Student Email</th>
-         <th>ISBN</th>
+         <th>Title</th>
          <th>Offer</th>
          <th>Expires</th>
        </tr>
        @for(buyer <- buyers) {
        <tr>
          <td>@buyer.getBuyerEmail()</td>
-         <td>@buyer.getIsbn()</td>
+         <td>@buyer.getTitle()</td>
          <td>$@buyer.getOffer()</td>
          <td>@buyer.getExpirationDate()</td>       
        </tr>

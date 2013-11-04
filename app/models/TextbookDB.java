@@ -92,5 +92,71 @@ public class TextbookDB {
       return result;
     }
     
+    //////////////////////////////////////////////
+    /**
+     * Returns A newly initialized Map of textbook titles.
+     * @return A map of textbook titles initialized to false.
+     */
+    public static Map<String, Boolean> getTitles() {
+      Map<String, Boolean> titleMap = new HashMap<String, Boolean>();
+      for (Map.Entry<Long, Textbook> textbook : textbooks.entrySet()) {
+        titleMap.put(textbook.getValue().getTitle(), false);
+      }
+      return titleMap;
+    }
+   
+    /**
+     * Returns A newly initialized Map of textbook titles with selected title indicated.
+     * @param title The selected textbook title.
+     * @return A map of textbook titles with the selected title set to true.
+     */
+    public static Map<String, Boolean> getTitles(String title) {
+      Map<String, Boolean> titleMap = new HashMap<String, Boolean>();
+      titleMap = getTitles();
+      titleMap.put(title, true);
+      return titleMap;
+    }
+     
+    /**
+     * Checks that the title is valid.
+     * @param title The selected textbook title.
+     * @return true if the title exists in the database, false otherwise.
+     */
+    public static Boolean isTitle(String title) {
+      Map<String, Boolean> titleMap = new HashMap<String, Boolean>();
+      titleMap = getTitles();
+      return titleMap.containsKey(titleMap);
+      
+    }
+    
+    /**
+     * Get the isbn of a specified title.
+     * @param title The title of the textbook.
+     * @return The ISBN of the textbook.
+     */
+    public static String getIsbnFromTitle(String title) {
+      String isbn = "";
+      for (Map.Entry<Long, Textbook> textbook : textbooks.entrySet()) {
+        if (title.equals(textbook.getValue().getTitle())) {
+          isbn = textbook.getValue().getIsbn();
+        }
+      }
+      return isbn;
+    }
+    
+    /**
+     * Get the title of a specified isbn.
+     * @param isbn The isbn of the textbook.
+     * @return The title of the textbook.
+     */
+    public static String getTitleFromIsbn(String isbn) {
+      String title = "";
+      for (Map.Entry<Long, Textbook> textbook : textbooks.entrySet()) {
+        if (isbn.equals(textbook.getValue().getIsbn())) {
+          title = textbook.getValue().getTitle();
+        }
+      }
+      return title;
+    }
     
 }

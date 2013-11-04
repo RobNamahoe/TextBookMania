@@ -22,6 +22,9 @@ public class BuyOffer {
   private long buyerId;
   /** Email address of the buyer. **/
   private String buyerEmail;
+  /** Textbook title. **/
+  private String title;
+  
   
   /**
    * Initializes a BuyOffer object.
@@ -31,12 +34,18 @@ public class BuyOffer {
    * @param expiration
    * @param buyerEmail
    */
-  public BuyOffer(long id, String isbn, int offer, long expiration, String buyerEmail) {
+  public BuyOffer(long id, String isbn, int offer, long expiration, String buyerEmail, String title) {
     this.id = id;
     this.setIsbn(isbn);
     this.offer = offer;
     this.expiration = expiration;
     this.setBuyerEmail(buyerEmail);
+    if (!title.equals("")) {
+      this.title = title;
+    }
+    else {
+      this.title = TextbookDB.getTitleFromIsbn(isbn);
+    }
   }
 
 
@@ -149,6 +158,22 @@ public class BuyOffer {
     this.buyerId = StudentDB.getIdFromEmail(buyerEmail);
     this.buyerEmail = buyerEmail;
     
+  }
+
+
+  /**
+   * @return the title
+   */
+  public String getTitle() {
+    return title;
+  }
+
+
+  /**
+   * @param title the title to set
+   */
+  public void setTitle(String title) {
+    this.title = title;
   }
 
 }

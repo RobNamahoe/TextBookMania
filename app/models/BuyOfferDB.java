@@ -26,8 +26,15 @@ public class BuyOfferDB {
     Calendar currentDate = Calendar.getInstance();
     Calendar expirationDate = currentDate;
     expirationDate.add(Calendar.DAY_OF_MONTH, 30);
-    BuyOffer buyOffer = new BuyOffer(id, formData.isbn, formData.offer, expirationDate.getTimeInMillis(),
-                                     formData.buyerEmail);
+    String isbn = "";
+    if (formData.isbn == null) {
+      isbn = TextbookDB.getIsbnFromTitle(formData.title);
+    }
+    else {
+      isbn = formData.isbn;
+    }
+    BuyOffer buyOffer = new BuyOffer(id, isbn, formData.offer, expirationDate.getTimeInMillis(),
+                                     formData.buyerEmail, formData.title);
     offers.put(id, buyOffer);
     System.out.println(id + ": " + formData.id + " added.");
     return buyOffer;

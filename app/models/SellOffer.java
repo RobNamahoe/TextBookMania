@@ -22,6 +22,8 @@ private long id = 0;
   private long sellerId;
   /** Email address of the seller. **/
   private String sellerEmail;
+  /** Textbook title. **/
+  private String title;
   
   /**
    * Initializes a SellOffer object.
@@ -31,12 +33,18 @@ private long id = 0;
    * @param expiration
    * @param sellerEmail
    */
-  public SellOffer(long id, String isbn, int offer, long expiration, String sellerEmail) {
+  public SellOffer(long id, String isbn, int offer, long expiration, String sellerEmail, String title) {
     this.id = id;
     this.isbn = isbn;
     this.offer = offer;
     this.expiration = expiration;
     this.setSellerEmail(sellerEmail);
+    if (!title.equals("")) {
+      this.title = title;
+    }
+    else {
+      this.title = TextbookDB.getTitleFromIsbn(isbn);
+    }
   }
 
 
@@ -148,6 +156,21 @@ private long id = 0;
   public void setSellerEmail(String sellerEmail) {
     this.sellerId = StudentDB.getIdFromEmail(sellerEmail);
     this.sellerEmail = sellerEmail;
+  }
+  
+  /**
+   * @return the title
+   */
+  public String getTitle() {
+    return title;
+  }
+
+
+  /**
+   * @param title the title to set
+   */
+  public void setTitle(String title) {
+    this.title = title;
   }
 
 }
