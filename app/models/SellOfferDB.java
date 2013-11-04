@@ -32,7 +32,6 @@ public class SellOfferDB {
     SellOffer sellOffer = new SellOffer(id, formData.isbn, formData.offer, expirationDate.getTimeInMillis(),
                                         formData.sellerEmail, formData.title);
     offers.put(id, sellOffer);
-    System.out.println(id + ": " + formData.isbn + " added.");
     return sellOffer;
   }
   

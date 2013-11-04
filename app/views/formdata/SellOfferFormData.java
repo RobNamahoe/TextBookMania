@@ -77,6 +77,10 @@ public class SellOfferFormData {
       index++;
     }
     
+    if (sellerEmail == null || sellerEmail.length() == 0) {
+      errors.add(new ValidationError("sellerEmail", "Email address is required."));
+    }
+    
     if (title == null || title.length() == 0) {
       errors.add(new ValidationError("title", "Textbook title is required."));
     }

@@ -81,6 +81,10 @@ public class BuyOfferFormData {
       errors.add(new ValidationError("title", "Textbook title is required."));
     }
     
+    if (buyerEmail == null || buyerEmail.length() == 0) {
+      errors.add(new ValidationError("buyerEmail", "Email address is required."));
+    }
+    
     if (offer != (int) offer) {
       errors.add(new ValidationError("offer", "Offer Should Only be a Whole Number."));
     }

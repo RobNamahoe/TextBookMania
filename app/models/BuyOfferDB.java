@@ -40,7 +40,6 @@ public class BuyOfferDB {
     BuyOffer buyOffer = new BuyOffer(id, isbn, formData.offer, expirationDate.getTimeInMillis(),
                                      formData.buyerEmail, formData.title);
     offers.put(id, buyOffer);
-    System.out.println(id + ": " + formData.id + " added.");
     return buyOffer;
   }
   
