@@ -1,7 +1,6 @@
 import models.BuyOfferDB;
 import models.SellOfferDB;
 import models.StudentDB;
-import models.Textbook;
 import models.TextbookDB;
 import play.Application;
 import play.GlobalSettings;

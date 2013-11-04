@@ -13,19 +13,23 @@ import views.formdata.BuyOfferFormData;
  *
  */
 public class BuyOfferDB {
-
+  
+  /** Maximum number of characters in ISBN. */
+  private static final int EXPIRATION_DAYS = 30;
+  
   private static Map<Long, BuyOffer> offers = new HashMap<>();
   
   /**
    * Adds a buy offer to the list.
-   * @param formData
-   * @return SellOffer
+   * @param formData Buy Offer form data.
+   * @return SellOffer The sell offer.
    */
   public static BuyOffer addOffer(BuyOfferFormData formData) {
+    
     long id = (formData.id == 0) ? offers.size() + 1 : formData.id;
     Calendar currentDate = Calendar.getInstance();
     Calendar expirationDate = currentDate;
-    expirationDate.add(Calendar.DAY_OF_MONTH, 30);
+    expirationDate.add(Calendar.DAY_OF_MONTH, EXPIRATION_DAYS);
     String isbn = "";
     if (formData.isbn == null) {
       isbn = TextbookDB.getIsbnFromTitle(formData.title);
@@ -42,7 +46,7 @@ public class BuyOfferDB {
   
   /**
    * Returns the whole buy offer list.
-   * @return
+   * @return A list of buy offers.
    */
   public static List<BuyOffer> getOffers() {
     return new ArrayList<>(offers.values());
@@ -50,8 +54,8 @@ public class BuyOfferDB {
   
   /**
    * Returns an offer with the given id.
-   * @param id
-   * @return
+   * @param id The id of the buy offer to return.
+   * @return The requested buy offer.
    */
   public static BuyOffer getOffer(long id) {
     BuyOffer buyOffer = offers.get(id);
@@ -60,7 +64,7 @@ public class BuyOfferDB {
   
   /**
    * Deletes an offer with a given id.
-   * @param id
+   * @param id The id of the buy offer to delete.
    */
   public static void deleteOffer(long id) {
     offers.remove(id);

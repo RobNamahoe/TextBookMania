@@ -6,6 +6,10 @@ import models.BuyOffer;
 import models.TextbookDB;
 import play.data.validation.ValidationError;
 
+/**
+ * Java backing class for Buy Offer form data.
+ * @author Evan Komiyama
+ */
 public class BuyOfferFormData {
   
   /** Offer id. */
@@ -30,8 +34,8 @@ public class BuyOfferFormData {
   }
   
   /**
-   * 
-   * @param offer
+   * Constructor method.
+   * @param offer The buy offer.
    */
   public BuyOfferFormData(BuyOffer offer) {
     this.id = offer.getId();
@@ -47,6 +51,7 @@ public class BuyOfferFormData {
    * @param id The id.
    * @param isbn The isbn.
    * @param offer the offer.
+   * @param buyerEmail The buyers email address.
    */
   public BuyOfferFormData(long id, String isbn, int offer, String buyerEmail) {
     this.id = id;
@@ -57,15 +62,15 @@ public class BuyOfferFormData {
   }
   
   /**
-   * 
-   * @return
+   * Checks that form fields are valid. Called by bindFormRequest().
+   * @return null if valid, a list of ValidationErrors if problems are found.
    */
   public List<ValidationError> validate() {
     List<ValidationError> errors = new ArrayList<>();
     
     long index = 1;
     boolean found = false;
-    while (index <= TextbookDB.getTextbooks().size() && found != true) {
+    while (index <= TextbookDB.getTextbooks().size() && !found) {
       if (isbn.equals(TextbookDB.getTextbook(index).getIsbn())) {
         found = true;
       }
@@ -76,7 +81,7 @@ public class BuyOfferFormData {
       errors.add(new ValidationError("title", "Textbook title is required."));
     }
     
-    if (offer != (int)offer) {
+    if (offer != (int) offer) {
       errors.add(new ValidationError("offer", "Offer Should Only be a Whole Number."));
     }
     

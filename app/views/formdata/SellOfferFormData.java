@@ -6,15 +6,19 @@ import models.SellOffer;
 import models.TextbookDB;
 import play.data.validation.ValidationError;
 
+/**
+ * Java backing class for Sell Offer form data.
+ * @author Evan Komiyama
+ */
 public class SellOfferFormData {
 
-  /** Offer id*/
+  /** Offer id. */
   public long id = 0;
   
   /** Dollar amount of bid.*/
   public int offer = 0;
   
-  /**Book ISBN*/
+  /**Book ISBN. */
   public String isbn = "";
   
   /** Email address of the seller. **/
@@ -23,10 +27,17 @@ public class SellOfferFormData {
   /** Textbook Title. **/
   public String title; 
   
+  /**
+   * Default constructor method.
+   */
   public SellOfferFormData() {
     //Nothing is Initialized
   }
   
+  /**
+   * Constructor method.
+   * @param offer The sell offer.
+   */
   public SellOfferFormData(SellOffer offer) {
     this.id = offer.getId();
     this.isbn = offer.getIsbn();
@@ -35,7 +46,13 @@ public class SellOfferFormData {
     this.title = offer.getTitle();
   }
 
-  
+  /**
+   * Constructor method.
+   * @param id The sell offer id.
+   * @param isbn The textbook isbn.
+   * @param offer The sell offer value ($).
+   * @param sellerEmail The sellers email address.
+   */
   public SellOfferFormData(long id, String isbn, int offer, String sellerEmail) {
     this.id = id;
     this.isbn = isbn;
@@ -44,14 +61,17 @@ public class SellOfferFormData {
     this.title = TextbookDB.getTitleFromIsbn(isbn);
   }
   
-  
+  /**
+   * Checks that form fields are valid. Called by bindFormRequest().
+   * @return null if valid, a list of ValidationErrors if problems are found.
+   */
   public List<ValidationError> validate() {
     List<ValidationError> errors = new ArrayList<>();
     
     long index = 1;
     boolean found = false;
-    while(index <= TextbookDB.getTextbooks().size() && found != true) {
-      if(isbn.equals(TextbookDB.getTextbook(index).getIsbn())) {
+    while (index <= TextbookDB.getTextbooks().size() && !found) {
+      if (isbn.equals(TextbookDB.getTextbook(index).getIsbn())) {
         found = true;
       }
       index++;
@@ -61,11 +81,11 @@ public class SellOfferFormData {
       errors.add(new ValidationError("title", "Textbook title is required."));
     }
     
-    if(offer != (int)offer) {
+    if (offer != (int) offer) {
       errors.add(new ValidationError("offer", "Offer Should Only be a Whole Number."));
     }
     
-    if(errors.isEmpty()) {
+    if (errors.isEmpty()) {
       return null;
     }
     return errors;

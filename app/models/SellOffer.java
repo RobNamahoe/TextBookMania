@@ -6,18 +6,18 @@ import java.util.Calendar;
 
 /**
  * Offer to sell a textbook in the store.
- * @author User1
+ * @author Evan Komiyama
  *
  */
 public class SellOffer {
-private long id = 0;
-  
+  /** The id of the sell offer. **/
+  private long id = 0;
+  /** The value of the offer. **/
   private int offer = 0;
-  
+  /** The expiration date of the offer. **/
   private long expiration = 0;
-  
+  /** The ISBN number of the textbook. **/
   private String isbn = ""; 
-  
   /** Student ID of the seller. **/
   private long sellerId;
   /** Email address of the seller. **/
@@ -27,11 +27,12 @@ private long id = 0;
   
   /**
    * Initializes a SellOffer object.
-   * @param id
-   * @param isbn
-   * @param offer
-   * @param expiration
-   * @param sellerEmail
+   * @param id The id of the sell offer.
+   * @param isbn The ISBN of the textbook being sold.
+   * @param offer The value of the offer in dollars.
+   * @param expiration The expiration date of the offer.
+   * @param sellerEmail The sellers email address.
+   * @param title The title of the textbook being sold.
    */
   public SellOffer(long id, String isbn, int offer, long expiration, String sellerEmail, String title) {
     this.id = id;
@@ -90,7 +91,7 @@ private long id = 0;
 
   /**
    * Sets the expiration time.
-   * @param expiration
+   * @param expiration The expiration date of the offer.
    */
   public void setExpiration(long expiration) {
     this.expiration = expiration;
